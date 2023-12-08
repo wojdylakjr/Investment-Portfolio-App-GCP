@@ -7,7 +7,7 @@ Aplikacja do zarządzania portfelem inwestycyjnym umożliwia:
 - **Dodawanie i śledzenie zakupionych akcji** 
 Użytkownik może wprowadzać szczegóły dotyczące swoich inwestycji, takie jak nazwa spółki, ilość zakupionych akcji, cena zakupu, data i inne istotne informacje.
 
-- ** Monitorowanie bieżącej wartości portfela** 
+- **Monitorowanie bieżącej wartości portfela** 
 Dzięki pobieraniu aktualnych cen akcji z zewnętrznego API, aplikacja wyświetla aktualną wartość posiadanych akcji, co umożliwia użytkownikowi śledzenie zmian wartości portfela w czasie rzeczywistym.
 
 - **Otrzymywanie codziennych aktualizacji** 
