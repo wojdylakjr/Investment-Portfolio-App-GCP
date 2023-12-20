@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String stockTicker;
     private LocalDateTime startDateTime;
     private Integer quantity;
@@ -23,5 +23,6 @@ public class Transaction {
     private BigDecimal sellPrice;
     private BigDecimal currencyExchangeSellRate;
     private LocalDateTime sellDateTime;
-    private BigDecimal profit;
+    private BigDecimal sellProfit;
+    private BigDecimal buyValue;
 }

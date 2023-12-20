@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Class-Path: xAPIJavaWrapper_2_4_9.jar json-simple-1.1.1.jar spring-boot-
+ starter-web-3.1.6.jar spring-boot-starter-data-jpa-3.1.6.jar h2-2.1.214
+ .jar spring-boot-starter-json-3.1.6.jar spring-boot-starter-aop-3.1.6.j
+ ar spring-boot-starter-jdbc-3.1.6.jar spring-boot-starter-3.1.6.jar spr
+ ing-boot-starter-tomcat-3.1.6.jar spring-webmvc-6.0.14.jar spring-web-6
+ .0.14.jar hibernate-core-6.2.13.Final.jar spring-data-jpa-3.1.6.jar spr
+ ing-aspects-6.0.14.jar spring-boot-autoconfigure-3.1.6.jar spring-boot-
+ 3.1.6.jar spring-boot-starter-logging-3.1.6.jar jakarta.annotation-api-
+ 2.1.1.jar spring-context-6.0.14.jar spring-aop-6.0.14.jar spring-orm-6.
+ 0.14.jar spring-jdbc-6.0.14.jar spring-data-commons-3.1.6.jar spring-tx
+ -6.0.14.jar spring-beans-6.0.14.jar spring-expression-6.0.14.jar spring
+ -core-6.0.14.jar snakeyaml-1.33.jar jackson-datatype-jsr310-2.15.3.jar 
+ jackson-module-parameter-names-2.15.3.jar jackson-annotations-2.15.3.ja
+ r jackson-core-2.15.3.jar jackson-datatype-jdk8-2.15.3.jar jackson-data
+ bind-2.15.3.jar tomcat-embed-websocket-10.1.16.jar tomcat-embed-core-10
+ .1.16.jar tomcat-embed-el-10.1.16.jar micrometer-observation-1.11.6.jar
+  aspectjweaver-1.9.20.1.jar HikariCP-5.0.1.jar jakarta.persistence-api-
+ 3.1.0.jar jakarta.transaction-api-2.0.1.jar jboss-logging-3.5.3.Final.j
+ ar hibernate-commons-annotations-6.0.6.Final.jar jandex-3.0.5.jar class
+ mate-1.5.1.jar byte-buddy-1.14.10.jar jaxb-runtime-4.0.4.jar jaxb-core-
+ 4.0.4.jar jakarta.xml.bind-api-4.0.1.jar jakarta.inject-api-2.0.1.jar a
+ ntlr4-runtime-4.10.1.jar logback-classic-1.4.11.jar log4j-to-slf4j-2.20
+ .0.jar jul-to-slf4j-2.0.9.jar slf4j-api-2.0.9.jar spring-jcl-6.0.14.jar
+  micrometer-commons-1.11.6.jar angus-activation-2.0.1.jar jakarta.activ
+ ation-api-2.1.2.jar logback-core-1.4.11.jar log4j-api-2.20.0.jar txw2-4
+ .0.4.jar istack-commons-runtime-4.1.2.jar
+Main-Class: pl.wojdylak.wallet.WalletApplication
+
