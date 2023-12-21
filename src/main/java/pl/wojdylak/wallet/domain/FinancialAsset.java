@@ -1,5 +1,6 @@
 package pl.wojdylak.wallet.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,9 +15,10 @@ public class FinancialAsset {
 
     private String broker;
     @OneToMany(mappedBy = "financialAsset")
+    @JsonIgnoreProperties("financialAssets")
     private List<Transaction> transactions;
-
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("financialAssets")
     @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 

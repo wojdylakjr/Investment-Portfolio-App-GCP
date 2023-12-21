@@ -13,4 +13,9 @@ public class WalletService {
     public void save(Wallet wallet) {
         walletRepository.save(wallet);
     }
+
+    public Wallet findById(Long walletId) {
+        return walletRepository.findById(walletId)
+                .orElseThrow();
+    }
 }

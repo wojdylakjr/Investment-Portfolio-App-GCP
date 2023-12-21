@@ -1,10 +1,11 @@
 package pl.wojdylak.wallet.resource;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import pl.wojdylak.wallet.apiClient.XtbApiClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.wojdylak.wallet.domain.Transaction;
-import pl.wojdylak.wallet.domain.TransactionData;
 import pl.wojdylak.wallet.service.TransactionService;
 
 
@@ -13,26 +14,10 @@ import pl.wojdylak.wallet.service.TransactionService;
 @RequiredArgsConstructor
 public class TransactionController {
     private final TransactionService transactionService;
-    private final XtbApiClient xtbClient;
 
     @PostMapping("/")
     public void createTransaction(@RequestBody Transaction transaction) {
         transactionService.createTransaction(transaction);
     }
 
-    @GetMapping("/{ticker}")
-    public String getTickerCurrentPrice(@PathVariable String ticker) throws Exception {
-        return xtbClient.getTickerCurrentPrice(ticker).toString();
-    }
-
-    @GetMapping("/symbols")
-    public String getAllSymbols() throws Exception {
-        return xtbClient.getAllSymbols();
-    }
-
-    @GetMapping("/{id}/getPrice")
-    public TransactionData getPrice(@PathVariable Long id) throws Exception {
-        return transactionService.getCurrentPrice(id);
-//        return xtbClient.getTickerCurrentPrice(ticker);
-    }
 }

@@ -5,10 +5,9 @@ import pro.xstore.api.message.command.APICommandFactory;
 import pro.xstore.api.message.error.APICommandConstructionException;
 import pro.xstore.api.message.error.APICommunicationException;
 import pro.xstore.api.message.error.APIReplyParseException;
+import pro.xstore.api.message.records.TickRecord;
 import pro.xstore.api.message.response.APIErrorResponse;
-import pro.xstore.api.message.response.AllSymbolsResponse;
 import pro.xstore.api.message.response.LoginResponse;
-import pro.xstore.api.message.response.TickPricesResponse;
 import pro.xstore.api.sync.Credentials;
 import pro.xstore.api.sync.ServerData;
 import pro.xstore.api.sync.SyncAPIConnector;
@@ -24,18 +23,26 @@ public class XtbApiClient {
     private final ServerData.ServerEnum server = ServerData.ServerEnum.DEMO;
     private SyncAPIConnector connector;
 
-    public TickPricesResponse getTickerCurrentPrice(String ticker) throws APIErrorResponse, APICommunicationException, APIReplyParseException, APICommandConstructionException {
-        initialConnection();
-        return APICommandFactory.executeTickPricesCommand(connector, 0L, List.of(ticker), Instant.now().getEpochSecond());
+    public TickRecord getTickerCurrentPrice(String ticker) throws APIErrorResponse, APICommunicationException, APIReplyParseException, APICommandConstructionException {
+
+        if (!initializeConnection()) {
+            throw new RuntimeException("Failed to establish connection with XTB API");
+        }
+        return APICommandFactory.executeTickPricesCommand(connector, 0L, List.of(ticker), Instant.now().getEpochSecond())
+                .getTicks()
+                .get(0);
     }
 
-    public String getAllSymbols() throws APIErrorResponse, APICommunicationException, APIReplyParseException, APICommandConstructionException {
-        initialConnection();
-        AllSymbolsResponse allSymbolsResponse = APICommandFactory.executeAllSymbolsCommand(connector);
-        return allSymbolsResponse.toString();
+    public String getAllXtbTickers() throws APIErrorResponse, APICommunicationException, APIReplyParseException, APICommandConstructionException {
+
+        if (!initializeConnection()) {
+            throw new RuntimeException("Failed to establish connection with XTB API");
+        }
+
+        return APICommandFactory.executeAllSymbolsCommand(connector).toString();
     }
 
-    private boolean initialConnection() {
+    private boolean initializeConnection() {
         try {
             connector = new SyncAPIConnector(server);
             Credentials credentials = new Credentials(LOGIN, PASSWORD);
@@ -43,7 +50,7 @@ public class XtbApiClient {
             return loginResponse != null && loginResponse.getStatus();
         } catch (IOException | APIErrorResponse | APICommunicationException | APIReplyParseException |
                  APICommandConstructionException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 

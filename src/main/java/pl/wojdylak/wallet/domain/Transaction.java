@@ -1,10 +1,12 @@
 package pl.wojdylak.wallet.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,8 +15,12 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("transactions")
     @JoinColumn(name = "financial_asset_id", nullable = false)
     private FinancialAsset financialAsset;
+    @JsonIgnoreProperties("transaction")
+    @OneToMany(mappedBy = "transaction")
+    private List<TransactionData> transactionsData;
     private LocalDateTime startDateTime;
     private Integer quantity;
     private BigDecimal buyStockPrice;

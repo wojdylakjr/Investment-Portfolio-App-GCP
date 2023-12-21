@@ -1,10 +1,7 @@
 package pl.wojdylak.wallet.resource;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.wojdylak.wallet.domain.Wallet;
 import pl.wojdylak.wallet.service.WalletService;
 
@@ -17,5 +14,10 @@ public class WalletController {
     @PostMapping("/")
     public void createWallet(@RequestBody Wallet wallet) {
         walletService.save(wallet);
+    }
+
+    @GetMapping("/{walletId}")
+    public Wallet getWallet(@PathVariable Long walletId) {
+        return walletService.findById(walletId);
     }
 }
