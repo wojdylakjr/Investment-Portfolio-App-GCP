@@ -1,20 +1,20 @@
 package pl.wojdylak.wallet.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 @Data
 @Entity
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String stockTicker;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "financial_asset_id", nullable = false)
+    private FinancialAsset financialAsset;
     private LocalDateTime startDateTime;
     private Integer quantity;
     private BigDecimal buyStockPrice;
@@ -25,4 +25,22 @@ public class Transaction {
     private LocalDateTime sellDateTime;
     private BigDecimal sellProfit;
     private BigDecimal buyValue;
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", ticker=" + financialAsset.getTicker() +
+                ", startDateTime=" + startDateTime +
+                ", quantity=" + quantity +
+                ", buyStockPrice=" + buyStockPrice +
+                ", currencyCode='" + currencyCode + '\'' +
+                ", currencyExchangeBuyRate=" + currencyExchangeBuyRate +
+                ", sellPrice=" + sellPrice +
+                ", currencyExchangeSellRate=" + currencyExchangeSellRate +
+                ", sellDateTime=" + sellDateTime +
+                ", sellProfit=" + sellProfit +
+                ", buyValue=" + buyValue +
+                '}';
+    }
 }

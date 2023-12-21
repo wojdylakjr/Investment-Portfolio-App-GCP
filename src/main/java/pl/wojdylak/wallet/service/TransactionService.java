@@ -3,6 +3,7 @@ package pl.wojdylak.wallet.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.wojdylak.wallet.apiClient.XtbApiClient;
+import pl.wojdylak.wallet.domain.FinancialAsset;
 import pl.wojdylak.wallet.domain.Transaction;
 import pl.wojdylak.wallet.domain.TransactionData;
 import pl.wojdylak.wallet.repository.TransactionDataRepository;
@@ -20,12 +21,17 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
+    private final FinancialAssetService financialAssetService;
     private final TransactionRepository transactionRepository;
     private final TransactionDataRepository transactionDataRepository;
     private final XtbApiClient xtbApiClient;
 
     public void createTransaction(Transaction transaction) {
+        FinancialAsset financialAsset = financialAssetService.getOrCreateFinancialAssetByTicker(transaction);
+        financialAsset.addTransaction(transaction);
         transaction.setBuyValue(transaction.getBuyStockPrice().multiply(BigDecimal.valueOf(transaction.getQuantity())));
+
+        System.out.println("Ticker: " + financialAsset);
         transactionRepository.save(transaction);
     }
 
@@ -35,7 +41,7 @@ public class TransactionService {
             return null;
         }
         Transaction transaction = optionalTransaction.get();
-        TickRecord tickRecord = xtbApiClient.getTickerCurrentPrice(transaction.getStockTicker())
+        TickRecord tickRecord = xtbApiClient.getTickerCurrentPrice(transaction.getFinancialAsset().getTicker())
                 .getTicks()
                 .get(0);
 
