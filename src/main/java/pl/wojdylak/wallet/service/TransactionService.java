@@ -21,10 +21,8 @@ public class TransactionService {
         financialAsset.addTransaction(transaction);
         transaction.setBuyValue(transaction.getBuyStockPrice().multiply(BigDecimal.valueOf(transaction.getQuantity())));
 
-        System.out.println("Ticker: " + financialAsset);
         transactionRepository.save(transaction);
     }
-
 
     public Transaction findById(Long transactionId) {
         return transactionRepository

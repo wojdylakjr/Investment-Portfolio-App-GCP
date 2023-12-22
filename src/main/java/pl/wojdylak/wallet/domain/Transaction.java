@@ -3,6 +3,7 @@ package pl.wojdylak.wallet.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+import pl.wojdylak.wallet.domain.valueData.TransactionValueData;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class Transaction {
     private FinancialAsset financialAsset;
     @JsonIgnoreProperties("transaction")
     @OneToMany(mappedBy = "transaction")
-    private List<TransactionData> transactionsData;
+    private List<TransactionValueData> transactionsData;
     private LocalDateTime startDateTime;
     private Integer quantity;
     private BigDecimal buyStockPrice;
@@ -31,6 +32,7 @@ public class Transaction {
     private LocalDateTime sellDateTime;
     private BigDecimal sellProfit;
     private BigDecimal buyValue;
+    private Boolean isActive = true;
 
     @Override
     public String toString() {
