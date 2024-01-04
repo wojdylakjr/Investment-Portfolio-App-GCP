@@ -5,8 +5,8 @@ from mailjet_rest import Client
 
 @functions_framework.http
 def hello_http(request):
-    api_key = '800ff74fb7d7b104988bfe279cd08224'
-    api_secret = '76172f7e67cb3c9c7eb19cd8e51dc2f6'
+    api_key = ''
+    api_secret = ''
 
     mailjet = Client(auth=(api_key, api_secret))
 
