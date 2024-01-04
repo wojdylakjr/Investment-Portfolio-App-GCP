@@ -1,9 +1,30 @@
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:mydb
+#    username: sa
+#    driverClassName: org.h2.Driver
+#  jpa:
+#    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+#  h2:
+#    console.enabled: true
+#
+
 spring:
+  cloud:
+    gcp:
+      project-id: testproject-410111
+      sql:
+        database-name: wallet
+        instance-connection-name: testproject-410111:europe-central2:my-database-instance
+        username: jrwojdylak@student.agh.edu.pl
+        password:
+
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    driverClassName: org.h2.Driver
+    driver-class-name: org.postgresql.Driver
+    continue-on-error: true
+    username: jrwojdylak@student.agh.edu.pl
+    password:
+
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
-  h2:
-    console.enabled: true
+    hibernate:
+      ddl-auto: update

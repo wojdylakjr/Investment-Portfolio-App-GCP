@@ -1,24 +1,29 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.6'
-	id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.springframework.boot' version '3.1.6'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'pl.wojdylak'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
+}
+
+ext {
+    set('springCloudGcpVersion', "4.9.0")
+    set('springCloudVersion', "2022.0.4")
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
@@ -26,8 +31,11 @@ dependencies {
     implementation files('xAPIWrapper/lib/json-simple-1.1.1.jar')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation platform("com.google.cloud:spring-cloud-gcp-dependencies:3.3.0")
+//    implementation 'com.google.cloud:spring-cloud-gcp-starter-sql'
+    implementation("com.google.cloud:spring-cloud-gcp-starter-sql-postgresql")
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.h2database:h2'
+//    runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -40,12 +48,20 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+task moveManifest(type: Copy) {
+    from 'build/tmp/jar/MANIFEST.MF'
+    into 'build/libs'
+}
+
 
 jar {
+    enabled = false
     manifest {
         attributes(
                 'Class-Path': configurations.runtimeClasspath.files.collect { it.getName() }.join(' '),
                 'Main-Class': 'pl.wojdylak.wallet.WalletApplication'
         )
     }
+    destinationDirectory = file("$buildDir/libs")
+    dependsOn moveManifest // Wykonaj zadanie przeniesienia przed zadaniem budowania JAR
 }

@@ -54,7 +54,5 @@ public class FinancialAssetService {
     public BigDecimal getTickerCurrentPrice(String ticker) {
         return BigDecimal.valueOf(xtbApiClient.getTickerCurrentPrice(ticker).getBid());
     }
-
-
 }
 
