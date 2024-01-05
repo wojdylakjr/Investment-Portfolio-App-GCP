@@ -53,6 +53,15 @@ task moveManifest(type: Copy) {
     into 'build/libs'
 }
 
+task createCloudFunctionZip(type: Zip) {
+    from 'CloudFunction'
+    include 'main.py'
+    include 'requirements.txt'
+    archiveFileName = 'cloud_function.zip'
+    destinationDirectory = file('build/dist')
+}
+
+tasks.compileJava.dependsOn createCloudFunctionZip
 
 jar {
     enabled = false

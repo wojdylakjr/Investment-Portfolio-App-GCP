@@ -12,10 +12,10 @@
 spring:
   cloud:
     gcp:
-      project-id: testproject-410111
+      project-id: nonprod-410222
       sql:
         database-name: wallet
-        instance-connection-name: testproject-410111:europe-central2:my-database-instance
+        instance-connection-name: nonprod-410222:europe-central2:my-database-instance
         username: jrwojdylak@student.agh.edu.pl
         password:
 

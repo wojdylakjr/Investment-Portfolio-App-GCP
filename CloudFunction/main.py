@@ -10,7 +10,7 @@ def hello_http(request):
 
     mailjet = Client(auth=(api_key, api_secret))
 
-    url = 'https://testproject-410111.lm.r.appspot.com/api/wallet/1/create-record'
+    url = 'https://nonprod-410222.lm.r.appspot.com/api/wallet/1/create-record'
     response = requests.post(url, json={})
     print(response)
 
